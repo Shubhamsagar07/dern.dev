@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useThemeContext } from "./context/store";
+import { Righteous } from "next/font/google";
 
 export default function Home() {
   const { theme } = useThemeContext();
@@ -13,8 +14,14 @@ export default function Home() {
     }
   }, [theme]);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <p>Hello Shubham + Rajkaran + login</p>
+    <main className="flex h-[41rem] flex-row text-white items-center justify-evenly w-full dark:bg-[--bg-dark]" >
+      <div >
+      <p className="font-bold w-96 h-5 text-2xl ">Welcome to Dern.dev <br></br>a place to manage your YouTube<br></br>channels list. </p>
+      </div>
+
+      <img src="\1.png" width={600} justify-evenly ></img>
+
+      
     </main>
   );
 }
