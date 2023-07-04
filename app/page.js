@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
 import { useThemeContext } from "./context/store";
-import { Righteous } from "next/font/google";
 import Image from "next/image";
 
 export default function Home() {
+  // Dark Mode
   const { theme } = useThemeContext();
 
   useEffect(() => {
