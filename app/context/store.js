@@ -1,23 +1,36 @@
-"use client"
-import { createContext, useContext, useState } from "react"
+"use client";
+import { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext({
-    theme: "",
-    handleThemeSwitch: () => "",
+  theme: "",
+  handleThemeSwitch: () => "",
 });
 
-export const ThemeContextProvider = ({children}) => {
-    const [theme, setTheme] = useState("dark");
+const UserContext = createContext({ user: "", setUser: () => "" });
 
-    const handleThemeSwitch = () => {
-        setTheme(theme === "dark" ? "light": "dark")
-    }
+export const UserContextProvider = ({ children }) => {
+  const [user, setUser] = useState({});
 
-    return (
-        <ThemeContext.Provider value={{theme, handleThemeSwitch}}>
-            {children}
-        </ThemeContext.Provider>
-    )
-}
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
-export const useThemeContext = () => useContext(ThemeContext)
+export const ThemeContextProvider = ({ children }) => {
+  const [theme, setTheme] = useState("dark");
+
+  const handleThemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, handleThemeSwitch }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useThemeContext = () => useContext(ThemeContext);
+export const useUserContext = () => useContext(UserContext);

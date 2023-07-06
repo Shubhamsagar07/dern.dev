@@ -1,9 +1,11 @@
 "use client";
 import { useEffect } from "react";
-import { useThemeContext } from "../context/store";
+import { useThemeContext, useUserContext } from "../context/store";
 import Board from "@/components/Board";
 
 export default function Home() {
+  const { user } = useUserContext();
+
   // Dark Mode
   const { theme } = useThemeContext();
 
@@ -16,8 +18,8 @@ export default function Home() {
   }, [theme]);
   return (
     <div className="p-16 flex flex-col dark:bg-[--bg-dark]">
-        <hr className="dark:text-white" />
-        <Board />
+      <hr className="dark:text-white" />
+      <Board />
     </div>
-  )
+  );
 }

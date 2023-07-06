@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ThemeContextProvider } from "./context/store";
+import { ThemeContextProvider, UserContextProvider } from "./context/store";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -16,9 +16,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeContextProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <UserContextProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </UserContextProvider>
         </ThemeContextProvider>
       </body>
     </html>

@@ -1,8 +1,27 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useThemeContext } from "../context/store";
+import supabase from "@/utils/supabase";
+
+
 export default function register() {
-    const { theme } = useThemeContext();
+  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        emailRedirectTo: 'http://localhost:3000/home'
+      }
+    })
+    console.log(data)
+  }
+
+  // Dark Mode
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     if (theme === "dark") {
@@ -18,6 +37,7 @@ export default function register() {
         <h1 className="dark:text-white text-center text-2xl">Sign in</h1>
         <div className="w-full h-52 flex flex-col justify-evenly items-center">
           <input
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full text-white border-black border-b-2 outline-none dark:bg-[--bg-dark] dark:border-white"
             placeholder="Email"
             type="text"
@@ -25,6 +45,7 @@ export default function register() {
             id=""
           />
           <input
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full text-white border-black border-b-2 outline-none dark:bg-[--bg-dark] dark:border-white"
             placeholder="Password"
             type="text"
@@ -41,7 +62,7 @@ export default function register() {
         </div>
         <p className="dark:text-white py-4 text-center"><a href="/login">Already have an account?</a></p>
         <div className="">
-          <button className="w-full rounded-2xl text-white p-2 dark:text-white bg-[--primary-color]">
+          <button onClick={() => handleRegister()} className="w-full rounded-2xl text-white p-2 dark:text-white bg-[--primary-color]">
             Submit
           </button>
         </div>
